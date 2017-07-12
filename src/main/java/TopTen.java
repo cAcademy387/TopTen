@@ -5,10 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class TopTen  implements TopTenInterface {
@@ -76,6 +73,8 @@ public class TopTen  implements TopTenInterface {
         return sb.toString();
     }
 
+    List<String> blacklist = Arrays.asList("Sarajevo", "BiH");
+
      public List<String> parseText(String text, List<Character> delimiters){
 
         List<String> res = new ArrayList<String>();
@@ -85,10 +84,13 @@ public class TopTen  implements TopTenInterface {
             char c = text.charAt(i);
             if(delimiters.contains(c)) {
                 String word = text.substring(d,i);
-                if(word.length() > 0) res.add(word);
+                if(word.length() > 2 && !blacklist.contains(word)) res.add(word);
                 d = i+1;
             }
         }
+
+         String word = text.substring(d);
+         if(word.length() > 2 ) res.add(word);
         return res;
     }
 
