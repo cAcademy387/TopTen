@@ -61,7 +61,7 @@ public class TopTenTest {
         res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters );
         assert (res.size() == 4);
 
-        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm", delimiters );
+        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters );
         assert (res.size() == 4);
     }
 
