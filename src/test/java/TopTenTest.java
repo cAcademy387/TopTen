@@ -57,6 +57,9 @@ public class TopTenTest {
 
         res = tt.parseText(",jedan, ,dva,", delimiters );
         assert (res.size() == 2);
+
+        res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters );
+        assert (res.size() == 4);
     }
 
     @org.junit.Test
