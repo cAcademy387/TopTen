@@ -88,9 +88,9 @@ public class TopTen  implements TopTenInterface {
                 d = i+1;
             }
         }
-
+            //TODO
          String word = text.substring(d);
-         if(word.length() > 2 && !blacklist.contains(word)) res.add(word);
+         if(word.length() > 2 && !blacklist.contains(word) && Character.isLetter(word.charAt(0))) res.add(word);
         return res;
     }
 
