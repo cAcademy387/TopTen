@@ -41,6 +41,7 @@ public class Main {
             prop.setProperty("WebSites", "klix.ba|oslobodjenje.ba|avaz.ba");
             prop.setProperty("user", "XXXX");
             prop.setProperty("password", "XXX");
+            prop.setProperty("LowerCase", "Enabled");
 
             // save properties to project root folder
             prop.store(output, null);
