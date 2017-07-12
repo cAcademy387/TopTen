@@ -1,7 +1,10 @@
+import com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -84,14 +87,14 @@ public class TopTen  implements TopTenInterface {
             char c = text.charAt(i);
             if(delimiters.contains(c)) {
                 String word = text.substring(d,i);
-                //word = word.toLowerCase();
+                word = word.toLowerCase();
                 if(word.length() > 2 && !blacklist.contains(word) && Character.isLetter(word.charAt(0))) res.add(word);
                 d = i+1;
             }
         }
             //TODO
          String word = text.substring(d);
-         //word = word.toLowerCase();
+         word = word.toLowerCase();
          if(word.length() > 2 && !blacklist.contains(word) && Character.isLetter(word.charAt(0))) res.add(word);
         return res;
     }
