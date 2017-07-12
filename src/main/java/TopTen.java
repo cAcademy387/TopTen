@@ -84,7 +84,7 @@ public class TopTen  implements TopTenInterface {
             char c = text.charAt(i);
             if(delimiters.contains(c)) {
                 String word = text.substring(d,i);
-                if(word.length() > 2 && !blacklist.contains(word)) res.add(word);
+                if(word.length() > 2 && !blacklist.contains(word) && Character.isLetter(word.charAt(0))) res.add(word);
                 d = i+1;
             }
         }
