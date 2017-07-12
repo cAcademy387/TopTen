@@ -29,7 +29,8 @@ public class TopTenTest {
 
     @org.junit.Test
     public void removeHtmlTags() throws Exception {
-
+        String res = tt.removeHtmlTags("<div>TEST</div>" );
+        assert (res.compareTo("-TEST-") == 0);
     }
     
     //        long startTime = System.currentTimeMillis();
