@@ -57,11 +57,11 @@ public class Main {
             listWC.add(new WordCount(wc.getKey(), wc.getValue()));
         }
         //sort by count
-        Collections.sort(listWC, new Comparator<WordCount>() {
-            public int compare(WordCount o1, WordCount o2) {
-                return o2.count - o1.count;
-            }
-        });
+        listWC.removeIf((wc) -> wc.count < 5);
+        listWC.sort((o1, o2) -> o1.word.compareTo(o2.word));
+        listWC.sort(
+                (o1, o2) -> o2.count - o1.count
+        );
 
         for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
 

@@ -100,7 +100,7 @@ public class TopTen  implements TopTenInterface {
 
      public List<String> parseText(String text, List<Character> delimiters){
 
-        List<String> res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
 
         int d=0; //position of last delimiter
         for(int i=0; i < text.length(); i++){
