@@ -27,7 +27,7 @@ public class TopTen  implements TopTenInterface {
         br = new BufferedReader(new InputStreamReader(is));
         while ((line = br.readLine()) != null) {
             sb.append(line);
-            System.out.println(line);
+            //System.out.println(line);
         }
         } catch (MalformedURLException mue) {
             mue.printStackTrace();
