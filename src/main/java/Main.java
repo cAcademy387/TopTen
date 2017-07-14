@@ -62,6 +62,7 @@ public class Main {
         listWC.sort(
                 (o1, o2) -> o2.count - o1.count
         );
+        //listWC.removeIf((wc) -> wc.word.charAt(0) != 's');
 
         for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
 
