@@ -50,7 +50,7 @@ public class TopTen  implements TopTenInterface {
         return html.substring(startIndex, endIndex);
     }
 	
-	private String removeScriptTag (String body) {
+	private String removeScriptTag (String body) { // Senka A
         StringBuilder sb = new StringBuilder();
         int firstI=-1;
         int lastI =-1;
