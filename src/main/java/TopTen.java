@@ -1,13 +1,10 @@
-import com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 
@@ -21,7 +18,9 @@ public class TopTen  implements TopTenInterface {
 
         try {
             // url = new URL("https://www.klix.ba/");
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
+            URLConnection connection = url.openConnection();
+
             //configure connection
             is = connection.getURL().openStream();  // throws an IOException
         br = new BufferedReader(new InputStreamReader(is));
@@ -120,13 +119,12 @@ public class TopTen  implements TopTenInterface {
         return res;
     }
 
-    public Map<String, Integer> countWords(List<String> words) {
-        Map<String, Integer> WordCount = new HashMap<String, Integer>();
+    public void countWords(List<String> words, Map<String, Integer> postojeca) {
+        Map<String, Integer> WordCount = postojeca;
         for(String w: words){
             if(WordCount.containsKey(w)) WordCount.put(w, WordCount.get(w) + 1);
             else WordCount.put(w,1);
         }
-        return WordCount;
     }
 
 }

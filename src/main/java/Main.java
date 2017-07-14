@@ -1,6 +1,5 @@
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -31,44 +30,30 @@ public class Main {
 
 
         Properties prop = new Properties();
-        OutputStream output = null;
 
         try {
-
-            output = new FileOutputStream("config.properties");
-
-            // set the properties value
-            prop.setProperty("WebSites", "klix.ba|oslobodjenje.ba|avaz.ba");
-            prop.setProperty("user", "XXXX");
-            prop.setProperty("password", "XXX");
-            prop.setProperty("LowerCase", "Enabled");
-
-            // save properties to project root folder
-            prop.store(output, null);
-
+            FileInputStream input = new FileInputStream("config.properties");
+            prop.load(input);
         } catch (IOException io) {
             io.printStackTrace();
-        } finally {
-            if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
         }
 
-        URL url = new URL("https://www.klix.ba/");
-        TopTen tt = new TopTen();
-        String html = tt.getHtml(url);
-        String body = tt.getBody(html);
-        String text = tt.removeHtmlTags(body);
-        List<String> words = tt.parseText(text, delimiters);
-        Map<String, Integer> wordCount = tt.countWords(words);
-        List<WordCount> listWC = new ArrayList<WordCount>();
+        String adrese[] = prop.getProperty("WebSites").split("\\|");
+        Map<String, Integer> zajednicka = new HashMap<String, Integer>();
+        for (String adresa : adrese) {
+            URL url = new URL(adresa);
+            TopTen tt = new TopTen();
+            String html = tt.getHtml(url);
+            String body = tt.getBody(html);
+            String text = tt.removeHtmlTags(body);
 
-        for(Map.Entry<String,Integer> wc : wordCount.entrySet()){
+            List<String> words = tt.parseText(text, delimiters);
+            tt.countWords(words, zajednicka);
+
+
+        }
+        List<WordCount> listWC = new ArrayList<WordCount>();
+        for (Map.Entry<String, Integer> wc : zajednicka.entrySet()) {
             listWC.add(new WordCount(wc.getKey(), wc.getValue()));
         }
         //sort by count
@@ -78,8 +63,7 @@ public class Main {
             }
         });
 
-        for(WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
-
+        for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
 
     }
 }

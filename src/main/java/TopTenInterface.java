@@ -11,6 +11,6 @@ public interface TopTenInterface {
     String getBody(String html);
     String removeHtmlTags(String body);
     List<String> parseText(String text, List<Character> delimiters);
-    Map<String, Integer> countWords(List<String> words);
+    void countWords(List<String> words, Map<String, Integer> postojeca);
 
 }
