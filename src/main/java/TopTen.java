@@ -100,10 +100,10 @@ public class TopTen  implements TopTenInterface {
         return sb.toString();
     }
 
-    ArrayList<String> blacklist = new ArrayList<>();
+    HashSet<String> blacklist = new HashSet<>();
             //Arrays.asList("Sarajevo", "BiH");
 
-     public List<String> parseText(String text, List<Character> delimiters){
+     public List<String> parseText(String text, List<Character> delimiters, boolean isLowerCase){
 
         List<String> res = new ArrayList<>();
         int d=0; //position of last delimiter
@@ -111,7 +111,9 @@ public class TopTen  implements TopTenInterface {
             char c = text.charAt(i);
             if(delimiters.contains(c)) {
                 String word = text.substring(d,i);
-                word = word.toLowerCase();
+                if (isLowerCase == true) {
+                    word = word.toLowerCase();
+                }
                 if(     word.length() > 2 &&
                         !blacklist.contains(word) &&
                         Character.isLetter(word.charAt(0))) res.add(word);
