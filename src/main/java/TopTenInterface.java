@@ -12,7 +12,7 @@ public interface TopTenInterface {
     String getHtml(URL url);
     String getBody(String html);
     String removeHtmlTags(String body);
-    List<String> parseText(String text, List<Character> delimiters);
+    List<String> parseText(String text, List<Character> delimiters, boolean isLowerCase);
     void countWords(List<String> words, Map<String, Integer> postojeca);
 
 

@@ -43,6 +43,10 @@ public class Main {
         }
 
         String adrese[] = prop.getProperty("WebSites").split("\\|");
+        String isLowerCase = prop.getProperty("LowerCase");
+        boolean isLowerCase2 = Boolean.parseBoolean(isLowerCase);
+
+
         Map<String, Integer> zajednicka = new HashMap<String, Integer>();
         for (String adresa : adrese) {
             URL url = new URL(adresa);
@@ -55,7 +59,7 @@ public class Main {
 
             long startTime = System.currentTimeMillis();
 
-            List<String> words = tt.parseText(text, delimiters);
+            List<String> words = tt.parseText(text, delimiters, isLowerCase2);
             long stopTime = System.currentTimeMillis();
             long elapsedTime = stopTime - startTime;
             System.out.println("Metod parseText "+ elapsedTime + " ms");

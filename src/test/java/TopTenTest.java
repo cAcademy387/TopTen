@@ -53,16 +53,16 @@ public class TopTenTest {
     @org.junit.Test
     public void parseText() throws Exception {
         List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
-        List<String> res = tt.parseText(",, ,,", delimiters );
+        List<String> res = tt.parseText(",, ,,", delimiters, true );
         assert (res.size() == 0);
 
-        res = tt.parseText(",jedan, ,dva,", delimiters );
+        res = tt.parseText(",jedan, ,dva,", delimiters, true );
         assert (res.size() == 2);
 
-        res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters );
+        res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters, true );
         assert (res.size() == 4);
 
-        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters );
+        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters, true );
         assert (res.size() == 4);
     }
 
