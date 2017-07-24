@@ -1,7 +1,11 @@
+import com.sun.org.omg.SendingContext._CodeBaseStub;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.*;
+import java.util.concurrent.Callable;
 
 public class Main {
 
@@ -66,5 +70,17 @@ public class Main {
 
         for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
 
+        long stopTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        //Thread.sleep(1000*4);
+        //System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", elapsedTime, startTime, stopTime );
+        System.out.println("Vrijeme izvrsenja je "+elapsedTime+"ms");
+
+
+
     }
+
+
 }
+
