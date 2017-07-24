@@ -100,19 +100,21 @@ public class TopTen  implements TopTenInterface {
         return sb.toString();
     }
 
-    List<String> blacklist = Arrays.asList("Sarajevo", "BiH");
+    ArrayList<String> blacklist = new ArrayList<>();
+            //Arrays.asList("Sarajevo", "BiH");
 
      public List<String> parseText(String text, List<Character> delimiters){
 
         List<String> res = new ArrayList<>();
-
         int d=0; //position of last delimiter
         for(int i=0; i < text.length(); i++){
             char c = text.charAt(i);
             if(delimiters.contains(c)) {
                 String word = text.substring(d,i);
                 word = word.toLowerCase();
-                if(word.length() > 2 && !blacklist.contains(word) && Character.isLetter(word.charAt(0))) res.add(word);
+                if(     word.length() > 2 &&
+                        !blacklist.contains(word) &&
+                        Character.isLetter(word.charAt(0))) res.add(word);
                 d = i+1;
             }
         }
