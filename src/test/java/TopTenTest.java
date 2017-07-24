@@ -64,6 +64,9 @@ public class TopTenTest {
 
         res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters, true );
         assert (res.size() == 4);
+
+        res = tt.parseText(",jedan i dva i tri sa cetiri, samo sve 23mm,", delimiters, true );
+        assert (res.size() == 4);
     }
 
     @org.junit.Test
