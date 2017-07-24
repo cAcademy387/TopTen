@@ -51,7 +51,15 @@ public class Main {
             String body = tt.getBody(html);
             String text = tt.removeHtmlTags(body);
 
+            for(int i=0; i < 10000; i++) tt.blacklist.add("Test" + i); //test
+
+            long startTime = System.currentTimeMillis();
+
             List<String> words = tt.parseText(text, delimiters);
+            long stopTime = System.currentTimeMillis();
+            long elapsedTime = stopTime - startTime;
+            System.out.println("Metod parseText "+ elapsedTime + " ms");
+
             tt.countWords(words, zajednicka);
 
 
@@ -70,13 +78,8 @@ public class Main {
 
         for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
 
-        long stopTime = System.currentTimeMillis();
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        //Thread.sleep(1000*4);
-        //System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", elapsedTime, startTime, stopTime );
-        System.out.println("Vrijeme izvrsenja je "+elapsedTime+"ms");
 
+        //System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", elapsedTime, startTime, stopTime );
 
 
     }
