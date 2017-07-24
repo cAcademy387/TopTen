@@ -29,7 +29,7 @@ public class TopTenTest {
 
     @org.junit.Test
     public void removeHtmlTags() throws Exception {
-        String res = tt.removeHtmlTags("<div>TEST</div>" );
+        String res = tt.removeHtmlTags(null, "<div>TEST</div>" );
         assert (res.compareTo("-TEST-") == 0);
     }
     
