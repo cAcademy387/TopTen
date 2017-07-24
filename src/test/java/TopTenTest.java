@@ -1,6 +1,5 @@
-import java.util.*;
-
-import static java.util.Arrays.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by arifcengic on 7/10/17.
@@ -33,7 +32,7 @@ public class TopTenTest {
         String res = tt.removeHtmlTags("<div>TEST</div>" );
         assert (res.compareTo("-TEST-") == 0);
     }
-
+    
     //        long startTime = System.currentTimeMillis();
 //        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
 //
@@ -53,18 +52,31 @@ public class TopTenTest {
 //        txtReader.close();
     @org.junit.Test
     public void parseText() throws Exception {
-        List<Character> delimiters = asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
-        List<String> res = tt.parseText(",, ,,", delimiters );
+        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
+        List<String> res = tt.parseText(",, ,,", delimiters, true );
         assert (res.size() == 0);
 
-        res = tt.parseText(",jedan, ,dva,", delimiters );
+        res = tt.parseText(",jedan, ,dva,", delimiters, true );
         assert (res.size() == 2);
 
-        res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters );
+        res = tt.parseText(",jedan i dva i tri sa cetiri", delimiters, true );
         assert (res.size() == 4);
 
-        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters );
+        res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters, true );
         assert (res.size() == 4);
+    }
+
+    @org.junit.Test
+    public void VelikaMalaSlova() throws Exception {
+        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
+        List<String> res = tt.parseText(",, ,,", delimiters, true );
+        assert (res.size() == 0);
+
+        res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, true );
+        assert (res.size() == 6);
+
+        res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, false );
+        assert (res.size() == 6);
     }
 
     @org.junit.Test
