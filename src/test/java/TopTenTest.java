@@ -64,6 +64,16 @@ public class TopTenTest {
 
         res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters, true );
         assert (res.size() == 4);
+    }
+
+    @org.junit.Test
+    public void VelikaMalaSlova() throws Exception {
+        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
+        List<String> res = tt.parseText(",, ,,", delimiters, true );
+        assert (res.size() == 0);
+
+        res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, true );
+        assert (res.size() == 6);
 
         res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, false );
         assert (res.size() == 6);
