@@ -1,5 +1,6 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
+import static java.util.Arrays.*;
 
 /**
  * Created by arifcengic on 7/10/17.
@@ -32,7 +33,7 @@ public class TopTenTest {
         String res = tt.removeHtmlTags("<div>TEST</div>" );
         assert (res.compareTo("-TEST-") == 0);
     }
-    
+
     //        long startTime = System.currentTimeMillis();
 //        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
 //
@@ -52,7 +53,7 @@ public class TopTenTest {
 //        txtReader.close();
     @org.junit.Test
     public void parseText() throws Exception {
-        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
+        List<Character> delimiters = asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
         List<String> res = tt.parseText(",, ,,", delimiters );
         assert (res.size() == 0);
 
