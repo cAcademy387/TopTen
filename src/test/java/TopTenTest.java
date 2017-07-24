@@ -66,7 +66,7 @@ public class TopTenTest {
         assert (res.size() == 4);
 
         res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, false );
-        assert (res.size() == 4);
+        assert (res.size() == 6);
     }
 
     @org.junit.Test
