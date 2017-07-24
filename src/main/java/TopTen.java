@@ -73,7 +73,7 @@ public class TopTen  implements TopTenInterface {
         return sb.toString();
     }
 	
-    public String removeHtmlTags(String body) {
+    public String removeHtmlTags(List<String> tags, String body) {
         StringBuilder sb = new StringBuilder();
 		body = removeScriptTag (body);
         int start = -1;
