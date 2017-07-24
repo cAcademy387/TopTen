@@ -31,31 +31,6 @@ public class TopTenTest {
     public void removeHtmlTags() throws Exception {
         String res = tt.removeHtmlTags("<div>TEST</div>" );
         assert (res.compareTo("-TEST-") == 0);
-
-        String res2 = tt.removeHtmlTags("<script>jQuery(function($){\n" +
-                "  $('document').ready(function(){\n" +
-                "\t\tsetTimeout(function(){\n" +
-                "\t\t\t$('#backgroundPopup').fadeIn(1000);\n" +
-                "\t\t\t$('#toPopup').fadeIn(1100);\n" +
-                "\t\t},100);\n" +
-                "\t});\n" +
-                "\t$('#close,#backgroundPopup').click(function(){\n" +
-                "\t\t$('#toPopup').fadeOut();\n" +
-                "\t\t$('#backgroundPopup').fadeOut();\n" +
-                "\t});\n" +
-                "\t$(this).keyup(function(e){\n" +
-                "\t\tif(e.which == 27){\n" +
-                "\t\t\t$('#toPopup').fadeOut();\n" +
-                "\t\t\t$('#backgroundPopup').fadeOut();\n" +
-                "\t\t}\t\n" +
-                "\t});\n" +
-                "});</script>" );
-
-        int startIndex = res2.indexOf("<script");
-        int endIndex = res2.indexOf("</script>" ,startIndex);
-        String replacement = "I AM JUST A REPLACEMENT";
-        String toBeReplaced = res2.substring(startIndex + 1, endIndex);
-        System.out.println(res2.replace(toBeReplaced, replacement));
     }
     
     //        long startTime = System.currentTimeMillis();
@@ -88,6 +63,9 @@ public class TopTenTest {
         assert (res.size() == 4);
 
         res = tt.parseText(",jedan i dva i tri sa cetiri, 23mm,", delimiters, true );
+        assert (res.size() == 4);
+
+        res = tt.parseText(",Veliko malo Veliko malo Veliko Malo,", delimiters, true );
         assert (res.size() == 4);
     }
 
