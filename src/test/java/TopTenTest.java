@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +33,17 @@ public class TopTenTest {
         String res = tt.removeHtmlTags(null, "<div>TEST</div>" );
         assert (res.compareTo("-TEST-") == 0);
     }
-    
+
+    @org.junit.Test
+    public void SkipTags() throws Exception {
+        ArrayList<String> Tags = new ArrayList<String>();
+        Tags.add("script");
+        Tags.add("header");
+        String res = tt.removeHtmlTags(Tags,"<script nesto > Text1 </script> <header> Text 2 </header> <h2> Text 3 </h2>");
+        assert (res.compareTo("Text3")==1);
+        String res1 = tt.removeHtmlTags(null,"<script nesto > Text1 </script> <header> Text 2 </header> <h2> Text 3 </h2>");
+        assert (res.compareTo("Text1Text2Text3")==1);
+    }
     //        long startTime = System.currentTimeMillis();
 //        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')');
 //

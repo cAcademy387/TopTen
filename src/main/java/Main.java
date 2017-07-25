@@ -53,7 +53,15 @@ public class Main {
             TopTen tt = new TopTen();
             String html = tt.getHtml(url);
             String body = tt.getBody(html);
-            String text = tt.removeHtmlTags(new ArrayList<String>(), body);
+
+
+            String Tags []= prop.getProperty("Tags").split("\\|");
+
+            String text;
+            ArrayList<String> T = new ArrayList<String>(Arrays.asList(Tags));
+            text = tt.removeHtmlTags(T, body);
+
+
 
             for(int i=0; i < 10000; i++) tt.blacklist.add("Test" + i); //test
 

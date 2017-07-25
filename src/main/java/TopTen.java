@@ -52,8 +52,32 @@ public class TopTen  implements TopTenInterface {
         int endIndex = html.indexOf("</body>", startIndex);
         return html.substring(startIndex, endIndex);
     }
+    private String SkipTags (List<String> Tags, String body)
+
+    {
+
+        StringBuilder sb = new StringBuilder();
+        int firstI=-1;
+        int lastI =-1;
+        int i=0;
+        while (i<body.length()){
+            for (String tag : Tags) {
+                firstI = body.indexOf("<"+tag, i);
+                lastI = body.indexOf("/"+tag+">", firstI) + tag.length()+2;
+                if (firstI < 0) {
+                    sb.append(body.substring(i));
+                    i = body.length();
+                } else {
+                    sb.append(body.substring(i, firstI));
+                    i = lastI;
+                }
+            }
+        }
+        return sb.toString();
+    }
+
 	
-	private String removeScriptTag (String body) { // Senka A
+	/*private String removeScriptTag (String body) { // Senka A
         StringBuilder sb = new StringBuilder();
         int firstI=-1;
         int lastI =-1;
@@ -72,10 +96,11 @@ public class TopTen  implements TopTenInterface {
 			}
         return sb.toString();
     }
+    */
 	
     public String removeHtmlTags(List<String> tags, String body) {
         StringBuilder sb = new StringBuilder();
-		body = removeScriptTag (body);
+		body = SkipTags (tags, body);
         int start = -1;
         //int end = -1;
         for(int i=0; i < body.length(); i++)
