@@ -1,3 +1,4 @@
+import com.sun.deploy.util.BlackList;
 import com.sun.org.omg.SendingContext._CodeBaseStub;
 
 import java.io.FileInputStream;
@@ -54,12 +55,18 @@ public class Main {
             String html = tt.getHtml(url);
             String body = tt.getBody(html);
 
-
             String Tags []= prop.getProperty("Tags").split("\\|");
-
             String text;
             ArrayList<String> T = new ArrayList<String>(Arrays.asList(Tags));
             text = tt.removeHtmlTags(T, body);
+
+            String Black[] = prop.getProperty("Blacklist").split("\\|");
+            for (String sadrzaj:Black
+                 ) {
+                tt.blacklist.add(sadrzaj);
+            }
+            
+
 
 
 
