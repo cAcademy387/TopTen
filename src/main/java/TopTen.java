@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,6 +8,60 @@ import java.util.concurrent.Callable;
 
 public class TopTen  implements TopTenInterface {
 
+
+    public List<WordCount> getResults() throws MalformedURLException {
+
+        List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')','-');
+
+
+        Properties prop = new Properties();
+
+        try {
+            FileInputStream input = new FileInputStream("config.properties");
+            prop.load(input);
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
+        String adrese[] = prop.getProperty("WebSites").split("\\|");
+        String isLowerCase = prop.getProperty("LowerCase");
+        boolean isLowerCase2 = Boolean.parseBoolean(isLowerCase);
+
+
+        Map<String, Integer> zajednicka = new HashMap<String, Integer>();
+        for (String adresa : adrese) {
+            URL url = new URL(adresa);
+            String html = getHtml(url);
+            String body = getBody(html);
+
+            String Tags []= prop.getProperty("Tags").split("\\|");
+            String text;
+            ArrayList<String> T = new ArrayList<String>(Arrays.asList(Tags));
+            text = removeHtmlTags(T, body);
+
+            String Black[] = prop.getProperty("Blacklist").split("\\|");
+            for (String sadrzaj:Black
+                    ) {
+                blacklist.add(sadrzaj);
+            }
+
+            List<String> words = parseText(text, delimiters, isLowerCase2);
+            countWords(words, zajednicka);
+
+        }
+        List<WordCount> listWC = new ArrayList<WordCount>();
+        for (Map.Entry<String, Integer> wc : zajednicka.entrySet()) {
+            listWC.add(new WordCount(wc.getKey(), wc.getValue()));
+        }
+        listWC.removeIf((wc) -> wc.count < 5); //filter
+        //sort by count
+        listWC.sort(
+                (o1, o2) -> o2.count - o1.count
+        );
+
+        return listWC;
+
+    }
 
 
 
@@ -77,26 +128,7 @@ public class TopTen  implements TopTenInterface {
     }
 
 	
-	/*private String removeScriptTag (String body) { // Senka A
-        StringBuilder sb = new StringBuilder();
-        int firstI=-1;
-        int lastI =-1;
-        int i=0;
-		while (i<body.length()){
-				firstI = body.indexOf("<script", i); 
-				lastI = body.indexOf("/script>", firstI)+"/script>".length(); 
-				if (firstI<0) {
-					sb.append(body.substring(i)); 
-					i=body.length();
-					}
-				else {
-					sb.append(body.substring(i, firstI)); 
-					i = lastI;
-					}
-			}
-        return sb.toString();
-    }
-    */
+
 	
     public String removeHtmlTags(List<String> tags, String body) {
         StringBuilder sb = new StringBuilder();
