@@ -10,26 +10,8 @@ import java.util.concurrent.Callable;
 
 public class Main {
 
-//    ArrayList<String> parseText(String text, List<Character> delimiters){
-//
-//        int d=0; //position of last delimiter
-//        for(int i=0; i < text.length(); i++){
-//            char c = text.charAt(i);
-//            if(delimiters.contains(c)) {
-//                String word = text.substring(d,i);
-//                if(word.length() > 0) System.out.println(word);
-//                d = i+1;
-//            }
-//        }
-//    }
-    static class WordCount {
-    public WordCount(String word, int count) {
-       this.word = word;
-        this.count = count;
-    }
-    String word;
-    int count;
-}
+
+
     public static void main(String[] args) throws Exception{
         List<Character> delimiters = Arrays.asList(' ', ',' ,'.' , ':', '!', '?', '"', '(', ')','-');
 
