@@ -47,41 +47,22 @@ public class Main {
                  ) {
                 tt.blacklist.add(sadrzaj);
             }
-            
-
-
-
-
-            for(int i=0; i < 10000; i++) tt.blacklist.add("Test" + i); //test
-
-            long startTime = System.currentTimeMillis();
 
             List<String> words = tt.parseText(text, delimiters, isLowerCase2);
-            long stopTime = System.currentTimeMillis();
-            long elapsedTime = stopTime - startTime;
-            System.out.println("Metod parseText "+ elapsedTime + " ms");
-
             tt.countWords(words, zajednicka);
-
 
         }
         List<WordCount> listWC = new ArrayList<WordCount>();
         for (Map.Entry<String, Integer> wc : zajednicka.entrySet()) {
             listWC.add(new WordCount(wc.getKey(), wc.getValue()));
         }
+        listWC.removeIf((wc) -> wc.count < 5); //filter
         //sort by count
-        listWC.removeIf((wc) -> wc.count < 5);
-        listWC.sort((o1, o2) -> o1.word.compareTo(o2.word));
         listWC.sort(
                 (o1, o2) -> o2.count - o1.count
         );
-        //listWC.removeIf((wc) -> wc.word.charAt(0) != 's');
 
         for (WordCount wc : listWC) System.out.println(wc.count + " - " + wc.word);
-
-
-        //System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", elapsedTime, startTime, stopTime );
-
 
     }
 
